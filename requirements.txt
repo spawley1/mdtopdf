@@ -1,0 +1,5 @@
+markdown
+pdfkit
+beautifulsoup4
+tqdm
+pygments
