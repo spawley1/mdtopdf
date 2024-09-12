@@ -1,4 +1,3 @@
-import markdown
 import pdfkit
 import sys
 import os
@@ -109,6 +108,10 @@ def main():
     parser.add_argument('-t', '--toc', action='store_true', help="Include table of contents")
     parser.add_argument('-v', '--verbose', action='store_true', help="Increase output verbosity")
     args = parser.parse_args()
+
+    # Add this check
+    if not args.input:
+        parser.error("At least one input file is required.")
 
     # Setup logging
     log_level = logging.DEBUG if args.verbose else logging.INFO
