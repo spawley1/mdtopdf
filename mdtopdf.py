@@ -39,8 +39,17 @@ def markdown_to_pdf(input_file, include_toc=False):
         output_file = os.path.join(input_dir, output_filename)
 
         # Read the Markdown file
-        with open(input_file, 'r', encoding='utf-8') as file:
-            markdown_text = file.read()
+        try:
+            with open(input_file, 'r', encoding='utf-8') as file:
+                markdown_text = file.read()
+        except IOError as e:
+            logging.error(f"Error reading file {input_file}: {str(e)}")
+            return False
+
+        # Check if the file is empty
+        if not markdown_text.strip():
+            logging.warning(f"File {input_file} is empty. Skipping.")
+            return False
 
         # Setup extensions
         extensions = [
@@ -96,7 +105,8 @@ def process_files(files, include_toc):
 
 def check_wkhtmltopdf():
     try:
-        subprocess.run(['wkhtmltopdf', '-v'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        result = subprocess.run(['wkhtmltopdf', '-v'], capture_output=True, text=True)
+        logging.info(f"wkhtmltopdf version: {result.stdout.strip()}")
     except FileNotFoundError:
         print("Error: wkhtmltopdf is not installed or not in PATH.")
         print("Please install wkhtmltopdf: https://wkhtmltopdf.org/downloads.html")

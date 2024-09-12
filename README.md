@@ -29,10 +29,13 @@ This Python script converts Markdown files to PDF format. It supports multiple f
    pip install -r requirements.txt
    ```
 
-3. Install wkhtmltopdf:
-   - On macOS: `brew install wkhtmltopdf`
-   - On Ubuntu/Debian: `sudo apt-get install wkhtmltopdf`
-   - For other systems, visit the [wkhtmltopdf downloads page](https://wkhtmltopdf.org/downloads.html)
+3. The `requirements.txt` file is included in the repository and contains all necessary Python dependencies.
+
+## Repository Contents
+
+- `mdtopdf.py`: The main Python script for converting Markdown to PDF.
+- `requirements.txt`: A file listing all required Python packages.
+- `README.md`: This file, containing usage instructions and project information.
 
 ## Usage
 
